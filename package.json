@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "dist/server.js",
     "scripts": {
-        "start": "rm -rf build && webpack --watch --config webpack.config.js",
+        "start": " webpack --watch --config webpack.config.js",
         "watch": "rm -rf dist && webpack --watch --config webpack.config.js",
         "build:prod": "webpack --config webpack.config.prod.js",
         "build": "webpack --config webpack.config.js"
