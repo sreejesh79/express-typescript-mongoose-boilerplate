@@ -1,5 +1,5 @@
 {
-    "name": "SimCareIDPService",
+    "name": "TTAuthService",
     "version": "1.0.0",
     "main": "dist/server.js",
     "scripts": {
@@ -16,7 +16,7 @@
         "@types/helmet": "4.0.0",
         "@types/node": "^20.11.24",
         "axios": "^1.6.7",
-        "bcrypt": "^5.1.1",
+        "bcryptjs": "^2.4.3",
         "compression": "^1.7.4",
         "config": "^3.3.11",
         "cookie-parser": "^1.4.6",

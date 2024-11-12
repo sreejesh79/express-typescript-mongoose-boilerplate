@@ -1,41 +1,35 @@
 import { Document, Schema, Model, model } from 'mongoose';
-import bcrypt from 'bcrypt';
+import { PasswordUtils } from '../../utils/password.utils';
 
 
 export interface IUserModel extends Document{
     _id: string;
-    mobile: string;
+	fullname: string;
     email: string;
-    fullname: string;
-    username: string;
     password: string;
+	createdAt: number;
+	updatedAt: number;
 }
 const types = Schema.Types;
 const userSchema: Schema = new Schema( {
-	username: { type: types.String, index: true, unique: true, required: true },
-	password: { type: types.String, required: true },
+	fullname: { type: types.String, index: true },
 	email: { type: types.String, unique: true, required: true, index: true },
-	mobile: { type: types.String, unique: true, required: true, index: true },
-	firstName: { type: types.String, index: true },
-	lastName: { type: types.String, index: true },
+	password: { type: types.String, required: true },
+} , {
+	timestamps: true
 } );
 
 /* eslint-disable */
-userSchema.pre<any>( 'save', function ( next: any ) {
-	if ( this.password && this.isModified( 'password' ) ) {
-		const user: any = this;
-		const saltRounds = 10;
-		try {
-			const salt = bcrypt.genSaltSync( saltRounds );
-			const hash = bcrypt.hashSync( user.password, salt );
-			user.password = hash;
-			user.token = '';
-			return next();
-		}catch( e ) {
-			return next( e );
-		}
-	}
-	return next();
+userSchema.pre<any>( 'save', async function ( next: any ) {
+	if ( this.password && this.isModified('password') ) {
+        try {
+            this.password = await PasswordUtils.hashPassword( this.password );
+            return next();
+        }catch(e) {
+            return next(e);
+        }
+    }
+    return next();  
 } );
 
 
