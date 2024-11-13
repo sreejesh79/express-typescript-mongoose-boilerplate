@@ -2,7 +2,7 @@ import Responses from 'config/responses';
 import { IUserModel } from 'models/user.model';
 import { IResponse } from 'types';
 import { Service } from 'typedi';
-import UserQueries from '../mongo/user.query';
+import UserQueries from '../mongo/user.queries';
 import { IUserBodyPayloadDTO } from 'api/dto/user.dto';
 
 @Service()
