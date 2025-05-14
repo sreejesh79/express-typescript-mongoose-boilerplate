@@ -76,7 +76,7 @@ export function Use ( path: string ) {
 	};
 }
 
-export function All ( path: string ) {
+export function All ( path: any ) {
 	return ( target: any, propertyKey: string ): void => {
 		if ( !Reflect.hasMetadata( 'routes', target.constructor ) ) {
 			Reflect.defineMetadata( 'routes', [], target.constructor );
